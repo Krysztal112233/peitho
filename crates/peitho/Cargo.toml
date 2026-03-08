@@ -4,6 +4,9 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+config.workspace = true
+snafu.workspace = true
 tokio.workspace = true
 
 peitho-config.workspace = true
+peitho-err.workspace = true

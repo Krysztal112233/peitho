@@ -1,8 +1,13 @@
-use std::io;
+mod error;
+
+use crate::error::Result;
+use peitho_config::PeithoConfig;
 use tokio::time::{Duration, sleep};
 
 #[tokio::main]
-async fn main() -> io::Result<()> {
+#[allow(clippy::result_large_err)]
+async fn main() -> Result<()> {
+    let _config = PeithoConfig::load()?;
     let shutdown = shutdown_signal();
     tokio::pin!(shutdown);
 
@@ -22,7 +27,7 @@ async fn main() -> io::Result<()> {
     Ok(())
 }
 
-async fn shutdown_signal() -> io::Result<()> {
+async fn shutdown_signal() -> Result<()> {
     let mut sigterm = tokio::signal::unix::signal(tokio::signal::unix::SignalKind::terminate())?;
     tokio::select! {
         _ = tokio::signal::ctrl_c() => Ok(()),

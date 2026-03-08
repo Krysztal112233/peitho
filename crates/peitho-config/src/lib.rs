@@ -1,5 +1,11 @@
+mod error;
+
+pub use error::{ConfigError, Result};
+
 use serde::Deserialize;
+use snafu::prelude::*;
 use std::path::Path;
+use crate::error::{BuildConfigSnafu, DeserializeConfigSnafu};
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct PeithoConfig {
@@ -19,12 +25,13 @@ pub struct SandboxConfig {
 }
 
 impl PeithoConfig {
-    pub fn load() -> Result<Self, config::ConfigError> {
+    pub fn load() -> Result<Self> {
         let settings = config::Config::builder()
             .add_source(config::File::from(Path::new("/etc/peitho/config.toml")).required(false))
             .add_source(config::File::from(Path::new("./config.toml")).required(false))
-            .build()?;
+            .build()
+            .context(BuildConfigSnafu)?;
 
-        settings.try_deserialize()
+        settings.try_deserialize().context(DeserializeConfigSnafu)
     }
 }

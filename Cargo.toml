@@ -2,6 +2,7 @@
 members = [
 	"crates/migration",
 	"crates/peitho",
+	"crates/peitho-err",
 	"crates/peitho-sandbox",
 	"crates/peitho-audit",
 	"crates/peitho-config",
@@ -20,8 +21,8 @@ bollard = "0.20"
 config = { version = "0.15", default-features = false, features = ["toml"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
+snafu = "0.8"
 tap = "1"
-thiserror = "1"
 tokio = { version = "1", features = ["full"] }
 uuid = { version = "1", features = ["v7"] }
 zmq = "0.10"
@@ -30,6 +31,7 @@ migration = { package = "migration", path = "./crates/migration/" }
 peitho-sandbox = { package = "peitho-sandbox", path = "./crates/peitho-sandbox/" }
 peitho-audit = { package = "peitho-audit", path = "./crates/peitho-audit/" }
 peitho-config = { package = "peitho-config", path = "./crates/peitho-config/" }
+peitho-err = { package = "peitho-err", path = "./crates/peitho-err/" }
 peitho-database = { package = "peitho-database", path = "./crates/peitho-database/" }
 peitho-memory = { package = "peitho-memory", path = "./crates/peitho-memory/" }
 peitho-pigeon = { package = "peitho-pigeon", path = "./crates/peitho-pigeon/" }
