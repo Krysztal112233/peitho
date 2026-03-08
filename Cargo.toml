@@ -26,6 +26,14 @@ tokio = { version = "1", features = ["full"] }
 uuid = { version = "1", features = ["v7"] }
 zmq = "0.10"
 
+migration = { package = "migration", path = "./crates/migration/" }
+peitho-sandbox = { package = "peitho-sandbox", path = "./crates/peitho-sandbox/" }
+peitho-audit = { package = "peitho-audit", path = "./crates/peitho-audit/" }
+peitho-config = { package = "peitho-config", path = "./crates/peitho-config/" }
+peitho-database = { package = "peitho-database", path = "./crates/peitho-database/" }
+peitho-memory = { package = "peitho-memory", path = "./crates/peitho-memory/" }
+peitho-pigeon = { package = "peitho-pigeon", path = "./crates/peitho-pigeon/" }
+
 [workspace.dependencies.sea-orm-migration]
 version = "1.1"
 features = ["runtime-tokio-rustls", "sqlx-postgres"]
