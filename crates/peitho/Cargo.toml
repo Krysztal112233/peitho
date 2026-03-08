@@ -5,3 +5,5 @@ edition.workspace = true
 
 [dependencies]
 tokio.workspace = true
+
+peitho-config.workspace = true
