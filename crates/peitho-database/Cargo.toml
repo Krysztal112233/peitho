@@ -1,0 +1,6 @@
+[package]
+name = "peitho-database"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]

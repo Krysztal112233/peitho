@@ -1,0 +1,13 @@
+.git
+.gitignore
+target
+**/target
+
+# Local env/config noise
+.env
+.env.*
+
+# Editor/OS
+.DS_Store
+.idea
+.vscode

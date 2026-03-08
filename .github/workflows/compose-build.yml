@@ -1,0 +1,25 @@
+name: Compose Build
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "**"
+
+jobs:
+  compose-build:
+    runs-on: ubuntu-latest
+    env:
+      POSTGRES_DB: peitho
+      POSTGRES_USER: peitho
+      POSTGRES_PASSWORD: peitho
+      DATABASE_URL: postgres://peitho:peitho@db:5432/peitho
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate compose config
+        run: docker compose config
+
+      - name: Build compose services
+        run: docker compose build
