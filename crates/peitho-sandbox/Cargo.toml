@@ -5,3 +5,7 @@ edition.workspace = true
 
 [dependencies]
 bollard.workspace = true
+bytesize.workspace = true
+crossbeam-skiplist.workspace = true
+deadpool.workspace = true
+snafu.workspace = true
