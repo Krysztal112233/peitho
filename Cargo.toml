@@ -2,7 +2,7 @@
 members = [
 	"crates/migration",
 	"crates/peitho",
-	"crates/peitho-action",
+	"crates/peitho-sandbox",
 	"crates/peitho-audit",
 	"crates/peitho-config",
 	"crates/peitho-database",
