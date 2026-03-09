@@ -2,10 +2,10 @@ mod error;
 
 pub use error::{ConfigError, Result};
 
+use crate::error::{BuildConfigSnafu, DeserializeConfigSnafu};
 use serde::Deserialize;
 use snafu::prelude::*;
 use std::path::Path;
-use crate::error::{BuildConfigSnafu, DeserializeConfigSnafu};
 
 #[derive(Debug, Clone, Deserialize)]
 pub struct PeithoConfig {

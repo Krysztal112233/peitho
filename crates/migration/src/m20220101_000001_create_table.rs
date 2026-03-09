@@ -2,6 +2,8 @@ use sea_orm_migration::prelude::extension::postgres::Type;
 use sea_orm_migration::sea_orm::DbBackend;
 use sea_orm_migration::{prelude::*, schema::*};
 
+const FK_HISTORIES_SESSION_ID: &str = "fk_histories_session_id";
+
 #[derive(DeriveMigrationName)]
 pub struct Migration;
 
@@ -25,10 +27,25 @@ impl MigrationTrait for Migration {
         manager
             .create_table(
                 Table::create()
+                    .table(Sessions::Table)
+                    .if_not_exists()
+                    .col(ColumnDef::new(Sessions::Id).uuid().not_null().primary_key())
+                    .col(
+                        timestamp_with_time_zone(Sessions::CreatedAt)
+                            .not_null()
+                            .default(Expr::current_timestamp()),
+                    )
+                    .to_owned(),
+            )
+            .await?;
+
+        manager
+            .create_table(
+                Table::create()
                     .table(Histories::Table)
                     .if_not_exists()
                     .col(pk_auto(Histories::Id))
-                    .col(string(Histories::SessionId).not_null())
+                    .col(uuid(Histories::SessionId).not_null())
                     .col(text(Histories::Content).not_null())
                     .col(
                         ColumnDef::new(Histories::Role)
@@ -47,6 +64,13 @@ impl MigrationTrait for Migration {
                         timestamp_with_time_zone(Histories::CreatedAt)
                             .not_null()
                             .default(Expr::current_timestamp()),
+                    )
+                    .foreign_key(
+                        ForeignKey::create()
+                            .name(FK_HISTORIES_SESSION_ID)
+                            .from(Histories::Table, Histories::SessionId)
+                            .to(Sessions::Table, Sessions::Id)
+                            .on_delete(ForeignKeyAction::Cascade),
                     )
                     .to_owned(),
             )
@@ -78,11 +102,23 @@ impl MigrationTrait for Migration {
             .await?;
 
         manager
+            .drop_table(Table::drop().table(Sessions::Table).to_owned())
+            .await?;
+
+        manager
             .drop_type(Type::drop().name(HistoryRole::Type).to_owned())
             .await?;
 
         Ok(())
     }
+}
+
+#[derive(DeriveIden)]
+enum Sessions {
+    Table,
+
+    Id,
+    CreatedAt,
 }
 
 #[derive(DeriveIden)]
