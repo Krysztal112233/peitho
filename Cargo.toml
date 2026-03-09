@@ -9,6 +9,7 @@ members = [
 	"crates/peitho-database",
 	"crates/peitho-memory",
 	"crates/peitho-pigeon",
+	"crates/peitho-agent",
 ]
 resolver = "3"
 
@@ -32,13 +33,14 @@ uuid = { version = "1", features = ["v7"] }
 zmq = "0.10"
 
 migration = { package = "migration", path = "./crates/migration/" }
-peitho-sandbox = { package = "peitho-sandbox", path = "./crates/peitho-sandbox/" }
+peitho-agent = { package = "peitho-agent", path = "./crates/peitho-agent/" }
 peitho-audit = { package = "peitho-audit", path = "./crates/peitho-audit/" }
 peitho-config = { package = "peitho-config", path = "./crates/peitho-config/" }
-peitho-err = { package = "peitho-err", path = "./crates/peitho-err/" }
 peitho-database = { package = "peitho-database", path = "./crates/peitho-database/" }
+peitho-err = { package = "peitho-err", path = "./crates/peitho-err/" }
 peitho-memory = { package = "peitho-memory", path = "./crates/peitho-memory/" }
 peitho-pigeon = { package = "peitho-pigeon", path = "./crates/peitho-pigeon/" }
+peitho-sandbox = { package = "peitho-sandbox", path = "./crates/peitho-sandbox/" }
 
 [workspace.dependencies.sea-orm-migration]
 version = "1.1"
