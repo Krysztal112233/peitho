@@ -110,6 +110,7 @@
 - Migration changes:
   - support PostgreSQL semantics expected by this repo,
   - include reversible `down`,
+  - if a migration defines foreign keys, define FK names as constants in the format `const FK_****: &str = "";` and reference them in `ForeignKey::create().name(...)` instead of inline string literals,
   - run `cargo check -p migration`.
 - Compose/runtime changes:
   - keep values env-driven,
