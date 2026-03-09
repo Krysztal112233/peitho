@@ -2,14 +2,14 @@
 members = [
 	"crates/migration",
 	"crates/peitho",
-	"crates/peitho-err",
-	"crates/peitho-sandbox",
+	"crates/peitho-agent",
 	"crates/peitho-audit",
 	"crates/peitho-config",
 	"crates/peitho-database",
+	"crates/peitho-err",
 	"crates/peitho-memory",
 	"crates/peitho-pigeon",
-	"crates/peitho-agent",
+	"crates/peitho-sandbox",
 ]
 resolver = "3"
 
@@ -18,6 +18,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace.dependencies]
+
 bollard = "0.20"
 bytesize = "2.3"
 config = { version = "0.15", default-features = false, features = ["toml"] }
@@ -41,6 +42,10 @@ peitho-err = { package = "peitho-err", path = "./crates/peitho-err/" }
 peitho-memory = { package = "peitho-memory", path = "./crates/peitho-memory/" }
 peitho-pigeon = { package = "peitho-pigeon", path = "./crates/peitho-pigeon/" }
 peitho-sandbox = { package = "peitho-sandbox", path = "./crates/peitho-sandbox/" }
+
+[workspace.dependencies.async-openai]
+version = "0.33"
+features = ["embedding", "chat-completion", "responses"]
 
 [workspace.dependencies.sea-orm]
 version = "1.1"
